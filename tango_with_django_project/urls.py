@@ -17,11 +17,15 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from rango import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
     path('',views.index, name = 'index'),
-
+    # path('about',views.about, name = 'about'),
     # any urls staring with rango will be mapped
     path('rango/',include('rango.urls')),
     path('admin/', admin.site.urls),
-]
+    # tells django to serve static content from MEDIA_URL
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
